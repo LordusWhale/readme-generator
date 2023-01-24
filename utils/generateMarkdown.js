@@ -1,34 +1,50 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
-function renderLicenseBadge(license) {}
-
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
-function renderLicenseLink(license) {}
-
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
-function renderLicenseSection(license) {}
-
+const { liscenseBadges, liscenseBoilerPlate } = require("./liscenseTypes");
 
 function licenseRender(liscense) {
   function renderBadge() {
-
+    if (!liscenseBadges[liscense]) return "";
+    return liscenseBadges[liscense];
   }
-  function renderLink() {
-
-  }
+  function renderLink() {}
   function renderSection() {
-
+    if (!liscenseBoilerPlate[liscense]) return "";
+    return liscenseBoilerPlate[liscense];
   }
 
-  return {renderBadge, renderLink, renderSection}
+  return { renderBadge, renderLink, renderSection };
 }
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
-  return `# ${data.title}
+  const {
+    title,
+    description,
+    installation,
+    usage,
+    contributing,
+    testing,
+    liscense,
+  } = data;
+  const liscenceRenderer = licenseRender(liscense);
+  return `# ${title}
+${liscense && liscenceRenderer.renderBadge()}
+${description && `## Description
+${installation}`}
 
+${installation && `## Installation
+${usage}`}
+
+${usage && `## Usage
+${contributing}`}
+
+${contributing && `## Contributing
+${testing}`}
+
+${testing && `## Testing
+${testing}`}
+
+${liscense && `## Liscense
+${liscenceRenderer.renderSection()}`}
 `;
 }
 

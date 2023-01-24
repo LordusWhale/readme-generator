@@ -1,5 +1,7 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
+const generateMarkdown = require("./utils/generateMarkdown");
+const { liscenseBadges } = require("./utils/liscenseTypes");
 
 // TODO: Create an array of questions for user input
 const questions = [
@@ -10,7 +12,7 @@ const questions = [
   },
   {
     type: "input",
-    name: "desciption",
+    name: "description",
     message: "Enter your project description",
   },
   {
@@ -30,13 +32,23 @@ const questions = [
   },
   {
     type: "input",
-    name: "test",
+    name: "testing",
     message: "Enter your project testing instructions",
   },
   {
     type: "list",
-    name: "faq",
-    choices: ["joe", "blow"],
+    name: "liscense",
+    choices: ["Apache License 2.0", "MIT License", "Mozilla Public License", "The Unlicense", "No Liscense" ],
+  },
+  {
+    type: "input",
+    name: "github",
+    message: "Enter your Github username",
+  },
+  {
+    type: "input",
+    name: "github",
+    message: "Enter your email address",
   },
 ];
 
@@ -58,6 +70,8 @@ async function init() {
     return console.log(err);
   }
 
+  const mdText = generateMarkdown(answers);
+  writeToFile("readme.md", mdText);
 
 }
 
