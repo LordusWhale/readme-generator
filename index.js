@@ -1,9 +1,7 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
 const generateMarkdown = require("./utils/generateMarkdown");
-const { liscenseBadges } = require("./utils/liscenseTypes");
 
-// TODO: Create an array of questions for user input
 const questions = [
   {
     type: "input",
@@ -52,27 +50,24 @@ const questions = [
   },
 ];
 
-// TODO: Create a function to write README file
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, (err)=> {
-        if (err) return console.log(err)
+        if (err) return console.log("An error occured")
     });
 }
 
-// TODO: Create a function to initialize app
 async function init() {
   const prompt = inquirer.createPromptModule();
   let answers;
   try {
     answers = await prompt(questions);
   } catch (err) {
-    return console.log(err);
+    return console.log("An error occured");
   }
 
   const mdText = generateMarkdown(answers);
-  writeToFile("reasd", mdText);
+  writeToFile("readme.md", mdText);
 
 }
 
-// Function call to initialize app
 init();
