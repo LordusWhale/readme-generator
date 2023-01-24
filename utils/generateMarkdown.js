@@ -1,17 +1,16 @@
-const { liscenseBadges, liscenseBoilerPlate } = require("./liscenseTypes");
+const { licenceBadges, licenceBoilerPlate } = require("./liscenseTypes");
 
-function licenseRender(liscense) {
+function licenceRender(licence) {
   function renderBadge() {
-    if (!liscenseBadges[liscense]) return "";
-    return liscenseBadges[liscense];
+    if (!licenceBadges[licence]) return "";
+    return licenceBadges[licence];
   }
-  function renderLink() {}
   function renderSection() {
-    if (!liscenseBoilerPlate[liscense]) return "";
-    return liscenseBoilerPlate[liscense];
+    if (!licenceBoilerPlate[licence]) return "";
+    return licenceBoilerPlate[licence];
   }
 
-  return { renderBadge, renderLink, renderSection };
+  return { renderBadge, renderSection };
 }
 
 // TODO: Create a function to generate markdown for README
@@ -24,28 +23,37 @@ function generateMarkdown(data) {
     contributing,
     testing,
     liscense,
+    github,
+    email
   } = data;
-  const liscenceRenderer = licenseRender(liscense);
+  const licenceRenderer = licenceRender(liscense);
   return `# ${title}
-${liscense && liscenceRenderer.renderBadge()}
-${description && `## Description
+${liscense && licenceRenderer.renderBadge()}
+${description && `## **Description**
 ${installation}`}
 
-${installation && `## Installation
+${installation && `## **Installation**
 ${usage}`}
 
-${usage && `## Usage
+${usage && `## **Usage**
 ${contributing}`}
 
-${contributing && `## Contributing
+${contributing && `## **Contributing**
 ${testing}`}
 
-${testing && `## Testing
+${testing && `## **Testing**
 ${testing}`}
 
-${liscense && `## Liscense
-${liscenceRenderer.renderSection()}`}
-`;
+${liscense && `## **Liscense**
+${licenceRenderer.renderSection()}`}
+
+## **Questions**
+To reach out and ask questions please contact me through github or email
+<ol>
+  ${github && `<li>Github: <a href=${`https://github.com/${github}`}>${github}</a></li>`}
+  ${email && `<li>Email: <a href=${`mailto:${email}`}>${email}</a></li>`}
+</ol>
+`
 }
 
 module.exports = generateMarkdown;
