@@ -2,6 +2,7 @@ const fs = require("fs");
 const inquirer = require("inquirer");
 const generateMarkdown = require("./utils/generateMarkdown");
 
+// Inquirer questions
 const questions = [
   {
     type: "input",
@@ -50,12 +51,13 @@ const questions = [
   },
 ];
 
+// Writing to file
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, (err)=> {
         if (err) return console.log("An error occured")
     });
 }
-
+// Start function
 async function init() {
   const prompt = inquirer.createPromptModule();
   let answers;
@@ -66,7 +68,7 @@ async function init() {
   }
 
   const mdText = generateMarkdown(answers);
-  writeToFile("readme.md", mdText);
+  writeToFile("markdownGeneration.md", mdText);
 
 }
 

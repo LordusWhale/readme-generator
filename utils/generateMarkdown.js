@@ -1,5 +1,8 @@
 const { licenceBadges, licenceBoilerPlate } = require("./liscenseTypes");
 
+
+// Liscense renderer
+
 function licenceRender(licence) {
   function renderBadge() {
     if (!licenceBadges[licence]) return "";
@@ -12,8 +15,7 @@ function licenceRender(licence) {
 
   return { renderBadge, renderSection };
 }
-
-// TODO: Create a function to generate markdown for README
+// Generating markdown text with supplied data
 function generateMarkdown(data) {
   const {
     title,
