@@ -37,7 +37,7 @@ const questions = [
   },
   {
     type: "list",
-    name: "liscense",
+    name: "licence",
     choices: ["Apache License 2.0", "MIT License", "Mozilla Public License", "The Unlicense", "No Liscense" ],
   },
   {
@@ -55,9 +55,8 @@ const questions = [
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, (err)=> {
-        if (err) return false
+        if (err) return console.log(err)
     });
-    return true;
 }
 
 // TODO: Create a function to initialize app
@@ -71,7 +70,7 @@ async function init() {
   }
 
   const mdText = generateMarkdown(answers);
-  writeToFile("readme.md", mdText);
+  writeToFile("reasd", mdText);
 
 }
 

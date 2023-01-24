@@ -22,15 +22,23 @@ function generateMarkdown(data) {
     usage,
     contributing,
     testing,
-    liscense,
+    licence,
     github,
     email
   } = data;
-  const licenceRenderer = licenceRender(liscense);
+  const licenceRenderer = licenceRender(licence);
   return `# ${title}
-${liscense && licenceRenderer.renderBadge()}
+${licence && licenceRenderer.renderBadge()}
 ${description && `## **Description**
 ${installation}`}
+
+## **Table of contents**
+${installation && `- [Installation](#installation)`}
+${usage && `- [usage](#usage)`}
+${contributing && `- [Contributing](#contributing)`}
+${testing && `- [Testing](#testing)`}
+${licence && `- [Licence](#licence)`}
+- [Questions](#questions)
 
 ${installation && `## **Installation**
 ${usage}`}
@@ -44,7 +52,7 @@ ${testing}`}
 ${testing && `## **Testing**
 ${testing}`}
 
-${liscense && `## **Liscense**
+${licence && `## **Licence**
 ${licenceRenderer.renderSection()}`}
 
 ## **Questions**
